@@ -1,0 +1,200 @@
+{
+  "users": [
+    {
+      "id": "u_001",
+      "name": "Ravi Kumar",
+      "email": "ravi@example.com",
+      "avatarUrl": "/avatars/u_001.png",
+      "role": "admin",
+      "timezone": "Asia/Kolkata",
+      "created_at": "2025-09-01T10:00:00Z"
+    },
+    {
+      "id": "u_002",
+      "name": "Priya Sharma",
+      "email": "priya@example.com",
+      "avatarUrl": "/avatars/u_002.png",
+      "role": "sales",
+      "timezone": "Asia/Kolkata",
+      "created_at": "2025-09-01T11:00:00Z"
+    },
+    {
+      "id": "u_003",
+      "name": "Amit Singh",
+      "email": "amit@example.com",
+      "avatarUrl": "/avatars/u_003.png",
+      "role": "viewer",
+      "timezone": "Asia/Kolkata",
+      "created_at": "2025-09-01T12:00:00Z"
+    }
+  ],
+  "companies": [
+    {
+      "id": "co_001",
+      "name": "Acme Pvt Ltd",
+      "website": "https://acme.example",
+      "industry": "Manufacturing",
+      "phone": "+91-9876543210",
+      "address": "Bengaluru, India",
+      "owner_id": "u_001",
+      "created_at": "2025-09-01T10:00:00Z"
+    },
+    {
+      "id": "co_002",
+      "name": "TechCorp Solutions",
+      "website": "https://techcorp.example",
+      "industry": "Technology",
+      "phone": "+91-9876543211",
+      "address": "Mumbai, India",
+      "owner_id": "u_002",
+      "created_at": "2025-09-02T10:00:00Z"
+    },
+    {
+      "id": "co_003",
+      "name": "Global Enterprises",
+      "website": "https://global.example",
+      "industry": "Consulting",
+      "phone": "+91-9876543212",
+      "address": "Delhi, India",
+      "owner_id": "u_001",
+      "created_at": "2025-09-03T10:00:00Z"
+    }
+  ],
+  "contacts": [
+    {
+      "id": "c_001",
+      "firstName": "Priya",
+      "lastName": "Shah",
+      "email": "priya@acme.example",
+      "phone": "+91-9123456789",
+      "company_id": "co_001",
+      "title": "Head of Operations",
+      "owner_id": "u_001",
+      "tags": ["lead", "hot"],
+      "created_at": "2025-09-02T11:00:00Z"
+    },
+    {
+      "id": "c_002",
+      "firstName": "Rajesh",
+      "lastName": "Kumar",
+      "email": "rajesh@techcorp.example",
+      "phone": "+91-9123456790",
+      "company_id": "co_002",
+      "title": "CTO",
+      "owner_id": "u_002",
+      "tags": ["prospect", "technical"],
+      "created_at": "2025-09-03T12:00:00Z"
+    },
+    {
+      "id": "c_003",
+      "firstName": "Sunita",
+      "lastName": "Patel",
+      "email": "sunita@global.example",
+      "phone": "+91-9123456791",
+      "company_id": "co_003",
+      "title": "VP Sales",
+      "owner_id": "u_001",
+      "tags": ["customer", "vip"],
+      "created_at": "2025-09-04T13:00:00Z"
+    }
+  ],
+  "deals": [
+    {
+      "id": "d_001",
+      "title": "Acme Annual License",
+      "company_id": "co_001",
+      "contact_id": "c_001",
+      "value": 120000,
+      "currency": "INR",
+      "stage": "Qualified",
+      "probability": 60,
+      "owner_id": "u_001",
+      "close_date": "2025-11-15",
+      "pipeline_id": "p_default",
+      "created_at": "2025-09-03T09:30:00Z"
+    },
+    {
+      "id": "d_002",
+      "title": "TechCorp Integration",
+      "company_id": "co_002",
+      "contact_id": "c_002",
+      "value": 85000,
+      "currency": "INR",
+      "stage": "Proposal",
+      "probability": 75,
+      "owner_id": "u_002",
+      "close_date": "2025-10-30",
+      "pipeline_id": "p_default",
+      "created_at": "2025-09-04T10:30:00Z"
+    },
+    {
+      "id": "d_003",
+      "title": "Global Consulting Deal",
+      "company_id": "co_003",
+      "contact_id": "c_003",
+      "value": 45000,
+      "currency": "INR",
+      "stage": "Negotiation",
+      "probability": 85,
+      "owner_id": "u_001",
+      "close_date": "2025-12-01",
+      "pipeline_id": "p_default",
+      "created_at": "2025-09-05T11:30:00Z"
+    }
+  ],
+  "activities": [
+    {
+      "id": "t_001",
+      "type": "call",
+      "subject": "Intro call with Priya",
+      "description": "Discussed project scope and requirements",
+      "related_to_type": "deal",
+      "related_to_id": "d_001",
+      "assignee_id": "u_001",
+      "due_date": "2025-09-22T14:00:00Z",
+      "status": "completed",
+      "priority": "medium",
+      "created_at": "2025-09-20T10:00:00Z"
+    },
+    {
+      "id": "t_002",
+      "type": "email",
+      "subject": "Follow-up on proposal",
+      "description": "Send detailed proposal document",
+      "related_to_type": "deal",
+      "related_to_id": "d_002",
+      "assignee_id": "u_002",
+      "due_date": "2025-09-25T10:00:00Z",
+      "status": "open",
+      "priority": "high",
+      "created_at": "2025-09-21T10:00:00Z"
+    },
+    {
+      "id": "t_003",
+      "type": "meeting",
+      "subject": "Contract negotiation",
+      "description": "Final contract terms discussion",
+      "related_to_type": "deal",
+      "related_to_id": "d_003",
+      "assignee_id": "u_001",
+      "due_date": "2025-09-28T15:00:00Z",
+      "status": "open",
+      "priority": "high",
+      "created_at": "2025-09-21T10:00:00Z"
+    }
+  ],
+  "pipelines": [
+    {
+      "id": "p_default",
+      "name": "Default Sales Pipeline",
+      "stages": [
+        {"id": "s_lead", "name": "Lead", "order": 1},
+        {"id": "s_qual", "name": "Qualified", "order": 2},
+        {"id": "s_prop", "name": "Proposal", "order": 3},
+        {"id": "s_neg", "name": "Negotiation", "order": 4},
+        {"id": "s_won", "name": "Won", "order": 5},
+        {"id": "s_lost", "name": "Lost", "order": 6}
+      ]
+    }
+  ]
+}

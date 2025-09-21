@@ -1,4 +1,45 @@
+import { useDeals, useContacts, useCompanies, useActivities } from '@/hooks/api';
+import { KPICard } from '@/components/dashboard/KPICard';
+import { RecentActivity } from '@/components/dashboard/RecentActivity';
+import { TopDeals } from '@/components/dashboard/TopDeals';
+import { 
+  DollarSign, 
+  Users, 
+  Building2, 
+  TrendingUp,
+  Calendar,
+  Target
+} from 'lucide-react';
+import { formatCurrency } from '@/lib/utils';
+
 const Dashboard = () => {
+  const { data: dealsResponse } = useDeals();
+  const { data: contactsResponse } = useContacts();
+  const { data: companiesResponse } = useCompanies();
+  const { data: activitiesResponse } = useActivities({ status: 'open' });
+
+  const deals = dealsResponse?.data || [];
+  const contacts = contactsResponse?.data || [];
+  const companies = companiesResponse?.data || [];
+  const openActivities = activitiesResponse?.data || [];
+
+  // Calculate KPIs
+  const totalRevenue = deals
+    .filter((deal: any) => deal.stage === 'Won')
+    .reduce((sum: number, deal: any) => sum + deal.value, 0);
+
+  const openDeals = deals.filter((deal: any) => 
+    !['Won', 'Lost'].includes(deal.stage)
+  );
+
+  const avgDealValue = openDeals.length > 0 
+    ? openDeals.reduce((sum: number, deal: any) => sum + deal.value, 0) / openDeals.length
+    : 0;
+
+  const conversionRate = deals.length > 0 
+    ? (deals.filter((deal: any) => deal.stage === 'Won').length / deals.length) * 100
+    : 0;
+
   return (
     <div className="space-y-6">
       <div>
@@ -6,69 +47,66 @@ const Dashboard = () => {
         <p className="text-muted-foreground">Welcome back! Here's your CRM overview.</p>
       </div>
 
-      {/* Placeholder content */}
+      {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="crm-card p-6">
-          <h3 className="text-sm font-medium text-muted-foreground">Total Revenue</h3>
-          <p className="text-2xl font-bold text-foreground mt-2">₹12.5L</p>
-          <p className="text-sm text-accent mt-1">+12% from last month</p>
-        </div>
+        <KPICard
+          title="Total Revenue"
+          value={formatCurrency(totalRevenue)}
+          change="+12% from last month"
+          changeType="positive"
+          icon={DollarSign}
+        />
         
-        <div className="crm-card p-6">
-          <h3 className="text-sm font-medium text-muted-foreground">Open Deals</h3>
-          <p className="text-2xl font-bold text-foreground mt-2">24</p>
-          <p className="text-sm text-accent mt-1">+3 new this week</p>
-        </div>
+        <KPICard
+          title="Open Deals"
+          value={openDeals.length}
+          change={`${openDeals.length} active`}
+          changeType="neutral"
+          icon={Target}
+        />
         
-        <div className="crm-card p-6">
-          <h3 className="text-sm font-medium text-muted-foreground">Conversion Rate</h3>
-          <p className="text-2xl font-bold text-foreground mt-2">68%</p>
-          <p className="text-sm text-accent mt-1">+5% improvement</p>
-        </div>
+        <KPICard
+          title="Conversion Rate"
+          value={`${conversionRate.toFixed(1)}%`}
+          change="+5% improvement"
+          changeType="positive"
+          icon={TrendingUp}
+        />
         
-        <div className="crm-card p-6">
-          <h3 className="text-sm font-medium text-muted-foreground">Active Contacts</h3>
-          <p className="text-2xl font-bold text-foreground mt-2">156</p>
-          <p className="text-sm text-muted-foreground mt-1">All time high</p>
-        </div>
+        <KPICard
+          title="Active Contacts"
+          value={contacts.length}
+          change="All time high"
+          changeType="positive"
+          icon={Users}
+        />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="crm-card p-6">
-          <h3 className="text-lg font-semibold mb-4">Recent Activity</h3>
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-2 h-2 bg-accent rounded-full"></div>
-              <span className="text-sm">New deal created: Acme Corp License</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-2 h-2 bg-primary rounded-full"></div>
-              <span className="text-sm">Contact updated: Priya Shah</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-2 h-2 bg-warning rounded-full"></div>
-              <span className="text-sm">Deal moved to negotiation stage</span>
-            </div>
-          </div>
-        </div>
+      {/* Secondary KPIs */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <KPICard
+          title="Companies"
+          value={companies.length}
+          icon={Building2}
+        />
+        
+        <KPICard
+          title="Open Tasks"
+          value={openActivities.length}
+          icon={Calendar}
+        />
+        
+        <KPICard
+          title="Avg Deal Value"
+          value={formatCurrency(avgDealValue)}
+          icon={DollarSign}
+        />
+      </div>
 
-        <div className="crm-card p-6">
-          <h3 className="text-lg font-semibold mb-4">Top Deals</h3>
-          <div className="space-y-4">
-            <div className="flex justify-between items-center">
-              <span className="text-sm font-medium">Acme Annual License</span>
-              <span className="text-sm font-bold">₹1.2L</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm font-medium">TechCorp Integration</span>
-              <span className="text-sm font-bold">₹85K</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm font-medium">StartupXYZ Platform</span>
-              <span className="text-sm font-bold">₹45K</span>
-            </div>
-          </div>
-        </div>
+      {/* Recent Activity and Top Deals */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <RecentActivity />
+        <TopDeals />
       </div>
     </div>
   );
