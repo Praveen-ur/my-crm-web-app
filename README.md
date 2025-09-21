@@ -1,73 +1,131 @@
-# Welcome to your Lovable project
+# CRM Pro - Modern Customer Relationship Management
 
-## Project info
+A modern, production-quality CRM frontend built with React, TypeScript, and Tailwind CSS.
 
-**URL**: https://lovable.dev/projects/1fca97cc-af96-42c4-a469-0345a8b370d3
+## Features
 
-## How can I edit this code?
+- **Dashboard** - KPI cards, pipeline overview, recent activity
+- **Contacts Management** - Search, filter, create, and manage customer contacts
+- **Companies** - Manage company accounts and relationships
+- **Deals Pipeline** - Kanban-style deal tracking with drag & drop
+- **Activities & Tasks** - Calendar view and task management
+- **Reports** - Analytics and insights
+- **Settings** - Team management, pipeline configuration
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+- **Frontend**: React 18 + TypeScript + Vite
+- **Styling**: Tailwind CSS + shadcn/ui components
+- **Routing**: React Router
+- **State Management**: TanStack Query (react-query)
+- **Forms**: React Hook Form + Zod validation
+- **Drag & Drop**: @dnd-kit
+- **Tables**: TanStack Table with virtualization
+- **Testing**: Vitest + React Testing Library + Playwright
+- **Mock API**: MSW (Mock Service Worker)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/1fca97cc-af96-42c4-a469-0345a8b370d3) and start prompting.
+## Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js 18+ and npm
+- Modern web browser
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd crm-pro
+```
 
-Follow these steps:
+2. Install dependencies:
+```bash
+npm install
+```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. Open your browser and navigate to `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Default Login Credentials
 
-**Use GitHub Codespaces**
+For development, you can use any email/password combination. The app uses mock authentication.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Available Scripts
 
-## What technologies are used for this project?
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run test` - Run unit tests
+- `npm run test:e2e` - Run end-to-end tests
+- `npm run storybook` - Start Storybook component library
 
-This project is built with:
+## Project Structure
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```
+src/
+├── components/          # Reusable UI components
+│   ├── layout/         # Layout components (Header, Sidebar)
+│   └── ui/             # shadcn/ui components
+├── pages/              # Route pages
+├── hooks/              # Custom React hooks
+├── lib/                # Utilities and configurations
+├── types/              # TypeScript type definitions
+└── mocks/              # MSW mock handlers and data
+```
 
-## How can I deploy this project?
+## Development Guidelines
 
-Simply open [Lovable](https://lovable.dev/projects/1fca97cc-af96-42c4-a469-0345a8b370d3) and click on Share -> Publish.
+- Follow the established design system tokens in `src/index.css`
+- Use semantic color classes instead of hardcoded colors
+- Ensure all components are accessible (ARIA labels, keyboard navigation)
+- Write tests for critical business logic
+- Use TypeScript strictly - no `any` types
 
-## Can I connect a custom domain to my Lovable project?
+## Deployment
 
-Yes, you can!
+### Build for Production
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+```bash
+npm run build
+```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+The built files will be in the `dist` directory.
+
+### Deploy to Vercel
+
+1. Connect your GitHub repository to Vercel
+2. Set build command: `npm run build`
+3. Set output directory: `dist`
+4. Deploy!
+
+### Deploy to Netlify
+
+1. Connect your GitHub repository to Netlify
+2. Set build command: `npm run build`
+3. Set publish directory: `dist`
+4. Deploy!
+
+## API Integration
+
+The app currently uses MSW for mocking API responses. To connect to a real backend:
+
+1. Set the `VITE_API_BASE_URL` environment variable
+2. Update the API client in `src/lib/api.ts`
+3. Remove or disable MSW handlers
+
+## Contributing
+
+1. Create a feature branch
+2. Make your changes
+3. Add tests if needed
+4. Ensure all tests pass
+5. Submit a pull request
+
+## License
+
+MIT License - see LICENSE file for details.
